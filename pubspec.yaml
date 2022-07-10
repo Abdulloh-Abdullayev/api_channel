@@ -19,8 +19,12 @@ dependencies:
   flutter_dotenv: ^5.0.2
   shimmer: ^2.0.0
   dio:
+  hive:
+  hive_flutter:
 
 dev_dependencies:
+  hive_generator:
+  build_runner:
   flutter_test:
     sdk: flutter
 

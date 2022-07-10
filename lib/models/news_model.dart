@@ -1,4 +1,7 @@
+import 'package:hive_flutter/hive_flutter.dart';
+part 'news_model.g.dart';
 
+@HiveType(typeId: 0)
 class NewsModel {
   NewsModel({
     this.status,
@@ -6,8 +9,11 @@ class NewsModel {
     this.articles,
   });
 
+  @HiveField(0)
   String? status;
+  @HiveField(1)
   int? totalResults;
+  @HiveField(2)
   List<Article>? articles;
 
   factory NewsModel.fromJson(Map<String, dynamic> json) => NewsModel(
@@ -18,7 +24,7 @@ class NewsModel {
 
 
 }
-
+@HiveType(typeId: 1)
 class Article {
   Article({
     this.source,
@@ -31,13 +37,21 @@ class Article {
     this.content,
   });
 
+  @HiveField(0)
   Source? source;
+  @HiveField(1)
   String? author;
+  @HiveField(2)
   String? title;
+  @HiveField(3)
   String? description;
+  @HiveField(4)
   String? url;
+  @HiveField(5)
   String? urlToImage;
+  @HiveField(6)
   DateTime? publishedAt;
+  @HiveField(7)
   String? content;
 
   factory Article.fromJson(Map<String, dynamic> json) => Article(
@@ -52,14 +66,17 @@ class Article {
   );
 
 }
-
+@HiveType(typeId: 2)
 class Source {
   Source({
     this.id,
     this.name,
   });
 
+
+  @HiveField(0)
   String? id;
+  @HiveField(1)
   String? name;
 
   factory Source.fromJson(Map<String, dynamic> json) => Source(

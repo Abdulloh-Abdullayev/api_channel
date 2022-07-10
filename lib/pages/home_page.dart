@@ -1,6 +1,7 @@
 import 'package:api_channel/models/news_model.dart';
 import 'package:api_channel/services/news_service.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -46,13 +47,28 @@ class _MyHomePageState extends State<MyHomePage> {
               return Text("NO DATA");
             }else{
               NewsModel data = snap.data!;
-              return ListView.builder(
+
+              Box box = Hive.box('newsxx');
+              List<Article> offlineDate = (box.getAt(0) as NewsModel).articles!;
+
+              return box.isEmpty ? ListView.builder(
                 itemCount: data.articles!.length,
                 itemBuilder: (context, index){
                   return Card(
                     elevation: 5,
                     child: ListTile(
                       title: Text("${data.articles![index].author}"),
+                    ),
+                  );
+                },
+              ) :
+              ListView.builder(
+                itemCount: data.articles!.length,
+                itemBuilder: (context, index){
+                  return Card(
+                    elevation: 5,
+                    child: ListTile(
+                      title: Text("${offlineDate[index].author}"),
                     ),
                   );
                 },
